@@ -1,0 +1,21 @@
+{
+  "name": "pagegetter",
+  "version": "0.0.1",
+  "description": "Gets page sources",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Get",
+    "Pages"
+  ],
+  "author": "Joe Pfeiffer",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "csv-parse": "^1.1.5",
+    "progress": "^1.1.8",
+    "request": "^2.74.0"
+  }
+}
