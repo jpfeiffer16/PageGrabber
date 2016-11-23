@@ -16,6 +16,8 @@
     "commander": "^2.9.0",
     "csv-parse": "^1.1.5",
     "progress": "^1.1.8",
-    "request": "^2.74.0"
+    "request": "^2.74.0",
+    "sequelize": "^3.27.0",
+    "sqlite3": "^3.1.8"
   }
 }
