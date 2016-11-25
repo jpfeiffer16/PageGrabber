@@ -7,6 +7,7 @@ var fs = require('fs'),
     os = require('os'),
     ProgressBar = require('progress');
 
+
 program
     .version(require('./package.json').version)
     .option('-f --file [string]', 'File to use')
@@ -33,14 +34,13 @@ let Result = sequelize.define('result', {
 });
 
 sequelize.sync().then(() => {
-  console.log('Done syncing');
-  fs.readFile(program.file, 'utf-8', function (err, data) {
+  console.log('Done syncing DB');
+  fs.readFile(path.normalize(program.file), 'utf-8', function (err, data) {
       if (err) throw err;
       csv(data, {
           trim: true
       }, function (err, output) {
           if (err) throw err;
-
           console.log('Done parsing csv');
           let bar = new ProgressBar(':bar', { total: output.length });
           output.forEach(function(data, index) {
