@@ -13,7 +13,8 @@ To get a commanding listing and info about installed reports:
 
 `$ node report -h`
 
-```  Usage: report [options]
+```
+  Usage: report [options]
 
   Options:
 
