@@ -1,4 +1,4 @@
-# DIBus
+# PageGrabber
 An anylytics and report generation engine for site audits
 
 ## Report API

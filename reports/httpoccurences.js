@@ -3,7 +3,7 @@ const path = require('path');
 const FILEPATH = path.normalize(path.join(__dirname, `../httpoccurences.csv`));
 
 module.exports = {
-  info: 'Generate a report that tracks the number and line numbers of non-secure links',
+  info: 'Generate a report that tracks the number of non-secure links and their line numbers',
   gen: (Models) => {
     //Pull out Models
     let { Result } = Models;
