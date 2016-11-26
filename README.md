@@ -15,17 +15,17 @@ const filepath = path.normalize('./data.csv');
 module.exports =  {
   info: 'An example report. In JS!',
   gen: function(Models) {
-    //All sqlite models contained in the DB are in the
-    //Models object
+    //All sequelize models contained in the sqlite 
+    //DB are in the Models object
     let stream = fs.createWriteStream();
     Models.Result.findAll((dbresults) => {
       //Dump whatever data you need here
       stream.write(dbresults.map((dbresult) => {
         return dbresult.toJSON().url;
-      }).join(','));
+      }).join(',') + '\n');
     });
     stream.end();
     return filepath;
   }
-}
+};
  ```
