@@ -1,4 +1,6 @@
 const fs = require('fs');
+const path = require('path');
+const FILEPATH = path.normalize(path.join(__dirname, `../httpoccurences.csv`));
 
 module.exports = {
   info: 'Generate a report that tracks the number and line numbers of non-secure links',
@@ -7,7 +9,7 @@ module.exports = {
     let { Result } = Models;
 
     //Create the stream for the report file.
-    let csvStream = fs.createWriteStream('./httpoccurences.csv');
+    let csvStream = fs.createWriteStream(FILEPATH);
     // csvStream.write('url,');
 
 
@@ -37,5 +39,6 @@ module.exports = {
       });
       csvStream.end();
     });
+    return FILEPATH;
   }
 }

@@ -15,18 +15,28 @@ program
     }
     console.log('Reports: ');
     files.forEach((file) => {
-      console.log(`    ${ file.replace('.js', '') } : ${ require(path.join(reportsPath, file)).info }`);
+      console.log(
+          `    ${ file.replace('.js', '') } : ${ 
+            require(path.join(reportsPath, file)).info
+          }`
+        );
     });
   })
   .parse(process.argv);
 
 //Sanity Checks
 if (!program.report) {
-  console.warn('Must include a report to generate. Use --help to see usage options');
+  console.warn(
+      'Must include a report to generate. Use --help to see usage options'
+    );
   process.exit(1);
 }
 
 //Generate the selected report
 require('./storage')((Models) => {
-  require(path.join(reportsPath, program.report)).gen(Models);
+  console.log(
+      `Report written to:\n ${ 
+        require(path.join(reportsPath, program.report)).gen(Models)
+      }`
+    );
 });
