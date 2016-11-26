@@ -17,23 +17,8 @@ if (!program.file) {
     throw 'Must include a file';
 }
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize({
-  logging: false,
-  dialect: 'sqlite',
-  storage: './data.sqlite'
-});
-
-let Result = sequelize.define('result', {
-  url: {
-    type: Sequelize.STRING
-  },
-  html: {
-    type: Sequelize.TEXT
-  }
-});
-
-sequelize.sync().then(() => {
+require('./storage')((Models)  => {
+  let { Result } = Models;
   console.log('Done syncing DB');
   fs.readFile(path.normalize(program.file), 'utf-8', function (err, data) {
       if (err) throw err;
@@ -53,7 +38,6 @@ sequelize.sync().then(() => {
                 }).then(() => {
                   bar.tick();
                 });
-
               });
           });
       })

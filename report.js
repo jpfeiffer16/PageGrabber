@@ -26,4 +26,7 @@ if (!program.report) {
   process.exit(1);
 }
 
-require(path.join(reportsPath, program.report)).gen();
+//Generate the selected report
+require('./storage')((Models) => {
+  require(path.join(reportsPath, program.report)).gen(Models);
+});
