@@ -19,12 +19,21 @@ module.exports = {
         return result;
       });
       results.forEach((result) => {
-        csvStream.write(`${ result.url }`);
-        let httpMatches = result.html.match(/http/g);
-        httpMatches.forEach((match) => { 
-          //TODO: Log line number here
-        });
-        csvStream.write('\n');
+        csvStream.write(`${ result.url },`);
+        if (!result.html) return;
+        let lines = result.html.match(/[^\r\n]+/g);
+        let matches = [];
+        for (let i  = 0; i < lines.length; i++) {
+          let line = lines[i];
+          let httpMatches = line.match(/http/g);
+          if (!httpMatches) continue;
+          httpMatches.forEach((match) => { 
+            //TODO: Log line number here
+            matches.push(i + 1);
+          });
+        }
+        csvStream.write(`${ matches.join(',') }\n`);
+        // csvStream.write('\n');
       });
       csvStream.end();
     });
