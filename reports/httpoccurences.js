@@ -21,16 +21,20 @@ module.exports = {
         csvStream.write(`${ result.url },`);
         if (!result.html) return;
         let lines = result.html.match(/[^\r\n]+/g);
-        let matches = [];
+        let matchesFromTop = [];
+        let matchesFromBottom = [];
         for (let i  = 0; i < lines.length; i++) {
           let line = lines[i];
           let httpMatches = line.match(/http/g);
           if (!httpMatches) continue;
           httpMatches.forEach((match) => { 
-            matches.push(i + 1);
+            matchesFromTop.push(i + 1);
+            matchesFromBottom.push(((lines.length - 1) - i) + 1);
           });
         }
-        csvStream.write(`${ matches.join(',') }\n`);
+        csvStream.write(
+            `\nFromTop,${ matchesFromTop.join(',') }\nFromBottom,${ matchesFromBottom.join(',') }\n`
+          );
       });
       csvStream.end();
     });
