@@ -7,6 +7,7 @@ let reportsPath = path.normalize(path.join(__dirname, 'reports'));
 program
   .version(require('./package.json').version)
   .option('-r --report [string]', 'Report to generate')
+  .option('-i --input [string]', 'Input to pass to the report')
   .on('--help', () => {
     let files = fs.readdirSync(reportsPath);
     if (files.length == 0) {
@@ -36,7 +37,7 @@ if (!program.report) {
 require('./storage')((Models) => {
   console.log(
       `Report written to:\n ${ 
-        require(path.join(reportsPath, program.report)).gen(Models)
+        require(path.join(reportsPath, program.report)).gen(Models, program.input)
       }`
     );
 });

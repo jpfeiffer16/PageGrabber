@@ -16,7 +16,7 @@ To query a site based off of a csv file:
 `node app -f /path/to/file.csv`
 
 ### Querying data and generating reports
-To get a commanding listing and info about installed reports:
+To get a command listing and info about installed reports:
 
 `$ node report -h`
 
@@ -58,9 +58,13 @@ const filepath = path.normalize('./data.csv');
 
 module.exports =  {
   info: 'An example report. In JS!',
-  gen: function(Models) {
+  gen: function(Models, input) {
     //All sequelize models contained in the sqlite 
     //DB are in the Models object
+
+    //The input var is what is passed to the report command
+    //with the optional -i flag, else it is undefined.
+
     let stream = fs.createWriteStream(filepath);
     Models.Result.findAll().then((dbresults) => {
       //Dump whatever data you need here
