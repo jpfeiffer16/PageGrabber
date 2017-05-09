@@ -2,3 +2,4 @@ node_modules/*
 *.sqlite
 *.swp
 *.csv
+.vscode/

@@ -31,6 +31,7 @@ To get a command listing and info about installed reports:
 
 Reports:
     httpoccurences : Generate a report that tracks the number of non-secure links and their line numbers
+    stringSearch : Generate a report that gets all lines containing a certain string. Must pass input with -i.
 ```
 
 To use a report:
