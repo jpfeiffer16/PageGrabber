@@ -1,6 +1,6 @@
-const program = require('commander');
-const fs = require('fs');
-const path = require('path');
+const program = require('commander'),
+      fs = require('fs'),
+      path = require('path');
 
 let reportsPath = path.normalize(path.join(__dirname, 'reports'));
 
@@ -34,10 +34,17 @@ if (!program.report) {
 }
 
 //Generate the selected report
+let report = null;
+try {
+  report = require(path.join(reportsPath, program.report));
+} catch (err) {
+  console.warn(`Cannot find report ${ program.report }`);
+  process.exit(1);
+}
 require('./storage')((Models) => {
   console.log(
       `Report written to:\n ${ 
-        require(path.join(reportsPath, program.report)).gen(Models, program.input)
+        report.gen(Models, program.input)
       }`
     );
 });

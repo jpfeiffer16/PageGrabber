@@ -16,7 +16,8 @@ program
 
 //Sanity checks
 if (!program.file) {
-    throw 'Must include a file';
+    console.warn('Must include a file');
+    process.exit(1);
 }
 
 function complete(errors) {
