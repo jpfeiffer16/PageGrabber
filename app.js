@@ -1,3 +1,4 @@
+#!/usr/bin/node
 //This version uses a sqlite db
 //Get module deps
 const fs = require('fs'),

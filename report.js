@@ -1,3 +1,4 @@
+#!/usr/bin/node
 const program = require('commander'),
       fs = require('fs'),
       path = require('path');
