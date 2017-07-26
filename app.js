@@ -55,17 +55,29 @@ require('./storage')((Models)  => {
             errors.push(err);
             return;
           }
-
-          if (~response.headers['content-type'].toString().toLowerCase().indexOf('text/html')) {
-            Result.create({
-              url: url,
-              html: body
-            }).then(() => {
+          
+          if (response.headers['content-type']) {
+            if (~response.headers['content-type'].toString().toLowerCase().indexOf('text/html')) {
+              Result.create({
+                url: url,
+                html: body
+              }).then(() => {
+                bar.tick();
+                if (bar.complete) {
+                  complete(errors);
+                }
+              });
+            } else {
               bar.tick();
+              let thisError = {
+                message: 'Mimetype not text/html',
+                url
+              };
+              errors.push(thisError);
               if (bar.complete) {
                 complete(errors);
               }
-            });
+            }
           } else {
             bar.tick();
             let thisError = {
